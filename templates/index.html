@@ -318,7 +318,12 @@
         e.preventDefault();
         const formData = new FormData(this);
         let optionType = formData.get('option_type');
-        let optionId = formData.get('option_id');
+        let optionId = '';
+        if (optionType !== 'custom') {
+            let optionId = formData.get('option_id');
+        }else{
+            let optionId = '';
+        }
         
         // If selecting from dropdown, find existing option
         if (optionType !== 'custom') {
