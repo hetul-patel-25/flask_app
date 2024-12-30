@@ -1,0 +1,3 @@
+2024-12-30 13:54:59,298 - INFO - User:[hetul2511@gmail.com] - Action: Registration successful - Details: Registration from IP: 127.0.0.1
+2024-12-30 13:55:09,745 - INFO - User:[hetul2511@gmail.com] - Action: Login successful - Details: Login from IP: 127.0.0.1
+2024-12-30 13:55:16,399 - INFO - User:[hetul2511@gmail.com] - Action: Logout successful

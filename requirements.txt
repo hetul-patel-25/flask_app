@@ -25,3 +25,4 @@ uuid==1.30
 Werkzeug==3.0.1
 Flask-WTF
 mysql-connector-python
+email_validator
