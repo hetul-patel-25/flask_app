@@ -655,5 +655,78 @@ h2 {
     font-weight: 500;
     margin-bottom: 0.5rem;
 }
+@media (max-width: 576px) {
+    .container {
+        padding: 0.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    #optionForm .card {
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 16px !important; /* Prevent zoom on iOS */
+        padding: 0.75rem !important;
+    }
+
+    .card[data-option-id] {
+        margin-bottom: 0.75rem;
+    }
+
+    .card[data-option-id] .card-body {
+        padding: 1rem;
+    }
+
+    .card[data-option-id] .card-title {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card[data-option-id] .card-text {
+        font-size: 0.9rem;
+        max-height: 80px;
+    }
+
+    .btn-danger {
+        padding: 0.5rem 0.75rem;
+        min-width: 40px; /* Better touch target */
+        min-height: 40px;
+    }
+}
+
+/* Tablet Adjustments */
+@media (min-width: 577px) and (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    #optionForm .card {
+        padding: 1.25rem;
+    }
+
+    .btn {
+        padding: 0.875rem 1.25rem;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .btn:active,
+    .card[data-option-id]:active {
+        transform: scale(0.98);
+    }
+}
 </style>
 {% endblock %}

@@ -3,17 +3,17 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container px-4">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="form-container">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="form-container my-4">
                 <h2 class="text-center mb-4">Welcome Back</h2>
                 {% with errors = get_flashed_messages(category_filter=["danger"]) %}
                     {% if errors %}
                         <div class="alert alert-danger">{{ errors[0] }}</div>
                     {% endif %}
                 {% endwith %}
-                
+
                 <form method="POST">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
@@ -52,115 +52,168 @@
     </div>
 </div>
 <style>
-.form-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
-    transition: all 0.3s ease;
-}
+    /* Root variables */
+    :root {
+        --primary-color: #0d6efd;
+        --success-color: #198754;
+        --danger-color: #dc3545;
+        --form-bg: rgba(255, 255, 255, 0.1);
+        --input-bg: rgba(255, 255, 255, 0.05);
+        --border-color: rgba(255, 255, 255, 0.2);
+    }
 
-/* Input group styles */
-.input-group {
-    position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    margin-bottom: 1rem;
-    overflow: hidden;
-}
+    /* Container styles */
+    .form-container {
+        background: var(--form-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border-color);
+        border-radius: clamp(15px, 3vw, 20px);
+        padding: clamp(1.25rem, 3vw, 2.5rem);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 100%;
+        margin: clamp(0.5rem, 2vw, 1.5rem) auto;
+    }
 
-.input-group-text {
-    background: transparent;
-    border: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
-    padding: 12px 15px;
-}
+    /* Typography */
+    h2 {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+        margin-bottom: clamp(1rem, 3vw, 1.5rem);
+        color: white;
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-.form-control {
-    background: transparent !important;
-    border: none !important;
-    color: white !important;
-    padding: 12px 35px 12px 15px !important;
-}
+    /* Form Groups */
+    .form-group {
+        margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
+    }
 
-/* Form headings */
-.form-container h2 {
-    color: white;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-}
+    /* Input Groups */
+    .input-group {
+        position: relative;
+        background: var(--input-bg);
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: clamp(0.75rem, 2vw, 1rem);
+    }
 
-/* Password toggle button */
-.password-toggle {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    z-index: 5;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 5px;
-}
+    .input-group:focus-within {
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
 
-.password-toggle:hover {
-    color: white;
-}
+    .input-group-text {
+        background: transparent;
+        border: none;
+        border-right: 1px solid var(--border-color);
+        color: rgba(255, 255, 255, 0.7);
+        padding: clamp(8px, 1.5vw, 12px);
+        font-size: clamp(14px, 4vw, 16px);
+    }
 
-/* Button styling */
-.btn-primary {
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    border: none;
-    padding: 12px;
-    border-radius: 12px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-}
+    /* Form Controls */
+    .form-control {
+        background: transparent !important;
+        border: none !important;
+        color: white !important;
+        padding: clamp(8px, 1.5vw, 12px) clamp(35px, 5vw, 45px) clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 15px) !important;
+        font-size: clamp(14px, 4vw, 16px) !important;
+        width: 100%;
+        height: auto !important;
+    }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    background: linear-gradient(45deg, #764ba2, #667eea);
-}
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
 
-/* Links */
-.text-primary {
-    color: #fff !important;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
+    /* Password Field Styles */
+    .password-toggle {
+        position: absolute;
+        right: clamp(10px, 2vw, 15px);
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        z-index: 5;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: clamp(4px, 1vw, 5px);
+        transition: color 0.3s ease;
+    }
 
-.text-primary:hover {
-    color: rgba(255, 255, 255, 0.8) !important;
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);
-}
+    /* Button Styles */
+    .btn {
+        padding: clamp(0.75rem, 2vw, 1rem);
+        font-size: clamp(14px, 4vw, 16px);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        height: auto;
+    }
 
-/* Autofill styles */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
-    -webkit-text-fill-color: white !important;
-    transition: background-color 5000s ease-in-out 0s;
-}
+    .btn-primary {
+        background: linear-gradient(45deg, #2937f0, #9f1ae2);
+        border: none;
+        box-shadow: 0 4px 15px rgba(41, 55, 240, 0.2);
+    }
 
-/* Alert styling */
-.alert-danger {
-    background: rgba(220, 53, 69, 0.1);
-    border: 1px solid rgba(220, 53, 69, 0.2);
-    color: white;
-}
-</style>
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(41, 55, 240, 0.3);
+    }
+
+    /* Links */
+    .text-primary {
+        color: var(--primary-color) !important;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .text-primary:hover {
+        color: #0a58ca !important;
+    }
+
+    /* Alert styling */
+    .alert-danger {
+        background: rgba(220, 53, 69, 0.1);
+        border: 1px solid rgba(220, 53, 69, 0.2);
+        color: white;
+        border-radius: 12px;
+        padding: clamp(0.75rem, 2vw, 1rem);
+        margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 576px) {
+        .container {
+            padding: 0.5rem;
+        }
+
+        .form-container {
+            padding: 1.25rem;
+            margin: 1rem;
+            border-radius: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 0.75rem;
+        }
+    }
+
+    /* Prevent zoom on iOS */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+        select,
+        textarea,
+        input {
+            font-size: 16px !important;
+        }
+    }
+    </style>
 {% endblock %}
