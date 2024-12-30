@@ -1,0 +1,69 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show custom-alert" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar"></div>
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+<style>
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    margin-bottom: 1rem;
+    z-index: 1050;
+    animation: slidein 0.5s ease-in-out;
+}
+
+.progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px !important;
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    width: 100%;
+    background: #ffc107;
+    animation: progress-animation 5s linear forwards;
+}
+
+.custom-alert:hover .progress-bar {
+    animation-play-state: paused !important;
+}
+
+@keyframes progress-animation {
+    0% { width: 100%; }
+    100% { width: 0%; }
+}
+
+@keyframes slidein {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const alerts = document.querySelectorAll('.custom-alert');
+    alerts.forEach(alert => {
+        const progressBar = alert.querySelector('.progress-bar');
+        
+        progressBar.addEventListener('animationend', () => {
+            bootstrap.Alert.getOrCreateInstance(alert).close();
+        });
+    });
+});
+</script>

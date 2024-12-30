@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Option</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.option_type.label(class="form-label") }}
+            {{ form.option_type(class="form-select") }}
+        </div>
+        
+        <div class="mb-3" id="customOptionDiv" style="display: none;">
+            {{ form.custom_option.label(class="form-label") }}
+            {{ form.custom_option(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(class="form-control", rows="4") }}
+        </div>
+
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+
+<script>
+document.getElementById('option_type').addEventListener('change', function() {
+    const customDiv = document.getElementById('customOptionDiv');
+    if (this.value === 'custom') {
+        customDiv.style.display = 'block';
+    } else {
+        customDiv.style.display = 'none';
+    }
+});
+</script>
+{% endblock %}

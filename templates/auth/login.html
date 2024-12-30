@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-container">
+                <h2 class="text-center mb-4">Welcome Back</h2>
+                {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+                    {% if errors %}
+                        <div class="alert alert-danger">{{ errors[0] }}</div>
+                    {% endif %}
+                {% endwith %}
+                
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="Enter your email") }}
+                        </div>
+                        {% if form.email.errors %}
+                            <div class="invalid-feedback d-block">{{ form.email.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group password-field">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), placeholder="Enter password", id="password") }}
+                            <span class="password-toggle" onclick="togglePassword('password')">
+                                <i class="fas fa-eye" id="password-icon"></i>
+                            </span>
+                        </div>
+                        {% if form.password.errors %}
+                            <div class="invalid-feedback d-block">{{ form.password.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-primary w-100") }}
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <p>Don't have an account? <a href="{{ url_for('auth.registration') }}" class="text-primary">Register</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Input group styles */
+.input-group {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.input-group-text {
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px 15px;
+}
+
+.form-control {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    padding: 12px 35px 12px 15px !important;
+}
+
+/* Form headings */
+.form-container h2 {
+    color: white;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Password toggle button */
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    z-index: 5;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.password-toggle:hover {
+    color: white;
+}
+
+/* Button styling */
+.btn-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #764ba2, #667eea);
+}
+
+/* Links */
+.text-primary {
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.text-primary:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Alert styling */
+.alert-danger {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    color: white;
+}
+</style>
+{% endblock %}
