@@ -57,9 +57,7 @@ def add_option(current_user):
             if existing:
                 option_id = existing.id
 
-
-        # Check for duplicates
-        if option_id:
+        if option_id and option_id != "undefined":
             # Update existing
             option = Option.query.get_or_404(option_id)
             if option.user_id != current_user.id:
